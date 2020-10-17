@@ -1,42 +1,41 @@
-// LoginScreen.js
-import React from "react";
+// SignUpScreen.js
+
+import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, View, Button } from "react-native";
-export default class Login extends React.Component {
-  state = { email: "", password: "", errorMessage: null };
-  handleLogin = () => {
-    // TODO: Firebase stuff...
-    console.log("handleLogin");
-  };
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Login</Text>
-        {this.state.errorMessage && (
-          <Text style={{ color: "red" }}>{this.state.errorMessage}</Text>
-        )}
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Email"
-          onChangeText={(email) => this.setState({ email })}
-          value={this.state.email}
-        />
-        <TextInput
-          secureTextEntry
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Password"
-          onChangeText={(password) => this.setState({ password })}
-          value={this.state.password}
-        />
-        <Button title="Login" onPress={this.handleLogin} />
-        <Button
-          title="Don't have an account? Sign Up"
-          onPress={() => this.props.navigation.navigate("SignUp")}
-        />
-      </View>
-    );
-  }
+const handleLogin = () => {
+  // TODO: Firebase stuff...
+  console.log("handle login");
+};
+export default function LoginScreen(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+  return (
+    <View style={styles.container}>
+      <Text>Login</Text>
+      {errorMessage && <Text style={{ color: "red" }}>{errorMessage}</Text>}
+      <TextInput
+        placeholder="Email"
+        autoCapitalize="none"
+        style={styles.textInput}
+        onChangeText={(email) => setEmail(email)}
+        value={email}
+      />
+      <TextInput
+        secureTextEntry
+        placeholder="Password"
+        autoCapitalize="none"
+        style={styles.textInput}
+        onChangeText={(password) => setPassword(password)}
+        value={password}
+      />
+      <Button title="Login" onPress={() => handleLogin()} />
+      <Button
+        title="Don't have an account? Signup"
+        onPress={() => props.navigation.navigate("SignUp")}
+      />
+    </View>
+  );
 }
 const styles = StyleSheet.create({
   container: {

@@ -1,17 +1,7 @@
 // HomeScreen.js
 import React from "react";
 import { StyleSheet, Platform, Image, Text, View } from "react-native";
-export default class Main extends React.Component {
-  state = { currentUser: null };
-  render() {
-    const { currentUser } = this.state;
-    return (
-      <View style={styles.container}>
-        <Text>Hi {currentUser && currentUser.email}!</Text>
-      </View>
-    );
-  }
-}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -19,3 +9,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+export default function HomeScreen() {
+  const currentUser = "user";
+  return (
+    <View style={styles.container}>
+      <Text>Hi {currentUser && currentUser}!</Text>
+    </View>
+  );
+}
