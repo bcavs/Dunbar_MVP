@@ -1,6 +1,8 @@
 // HomeScreen.js
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Platform, Image, Text, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { AuthContext } from "../navigation/AuthProvider";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,10 +12,13 @@ const styles = StyleSheet.create({
   },
 });
 export default function HomeScreen() {
-  const currentUser = "user";
+  const { user, logout } = useContext(AuthContext);
   return (
     <View style={styles.container}>
-      <Text>Hi {currentUser && currentUser}!</Text>
+      {/* <Text>Hi {user && user}!</Text> */}
+      <TouchableOpacity onPress={() => logout()}>
+        <Text>Sign Out</Text>
+      </TouchableOpacity>
     </View>
   );
 }

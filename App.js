@@ -1,42 +1,36 @@
-import React from "react";
-import { StatusBar } from "expo-status-bar";
+import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 
-import HomeScreen from "./src/screens/HomeScreen";
-import LoadingScreen from "./src/screens/LoadingScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import SignUpScreen from "./src/screens/SignUpScreen";
+import Providers from "./src/navigation";
+import firebase from "firebase";
 
-var isSignedIn = false;
-var isLoading = false;
-
-const Stack = createStackNavigator();
-
-export default function App() {
-  if (isLoading) {
-    return <LoadingScreen />;
-  } else {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          {isSignedIn ? (
-            <>
-              <Stack.Screen name="Home" component={HomeScreen} />
-            </>
-          ) : (
-            <>
-              <Stack.Screen name="Login" component={LoginScreen} />
-              <Stack.Screen name="SignUp" component={SignUpScreen} />
-            </>
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+  apiKey: "AIzaSyBE6WoqKloQieY4Oay2wKx9h6DilSHmdTE",
+  authDomain: "dunbar-mvp.firebaseapp.com",
+  databaseURL: "https://dunbar-mvp.firebaseio.com",
+  projectId: "dunbar-mvp",
+  storageBucket: "dunbar-mvp.appspot.com",
+  messagingSenderId: "176680631031",
+  appId: "1:176680631031:web:78d4d2cac8a324dfbf71f2",
+  measurementId: "G-VB8CBCQ4LQ",
+};
+if (firebase.apps.length == 0) {
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+}
+export class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSignedIn: false,
+    };
+  }
+  render() {
+    return <Providers />;
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -45,3 +39,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default App;

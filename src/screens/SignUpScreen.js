@@ -1,15 +1,17 @@
 // SignUpScreen.js
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, Text, TextInput, View, Button } from "react-native";
-const handleSignUp = () => {
-  // TODO: Firebase stuff...
-  console.log("handleSignUp");
-};
-export default function SignUpScreen(props) {
+
+import { AuthContext } from "../navigation/AuthProvider";
+
+export default function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const { register } = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       <Text>Sign Up</Text>
@@ -29,10 +31,10 @@ export default function SignUpScreen(props) {
         onChangeText={(password) => setPassword(password)}
         value={password}
       />
-      <Button title="Sign Up" onPress={() => handleSignUp()} />
+      <Button title="Sign Up" onPress={() => register(email, password)} />
       <Button
         title="Already have an account? Login"
-        onPress={() => props.navigation.navigate("Login")}
+        onPress={() => navigation.navigate("Login")}
       />
     </View>
   );
