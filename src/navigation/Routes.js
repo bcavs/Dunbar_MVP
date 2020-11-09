@@ -5,6 +5,7 @@ import AuthStack from "./AuthStack";
 import HomeStack from "./HomeStack";
 import { AuthContext } from "./AuthProvider";
 import LoadingScreen from "../screens/LoadingScreen";
+import { SafeAreaView, StyleSheet, StatusBar } from "react-native";
 
 export default function Routes() {
   const { user, setUser } = useContext(AuthContext);
@@ -24,8 +25,17 @@ export default function Routes() {
     return <LoadingScreen />;
   }
   return (
-    <NavigationContainer>
-      {user ? <HomeStack /> : <AuthStack />}
-    </NavigationContainer>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      <NavigationContainer>
+        {user ? <HomeStack /> : <AuthStack />}
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
