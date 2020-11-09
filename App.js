@@ -7,14 +7,14 @@ import firebase from "firebase";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
-  apiKey: "AIzaSyBE6WoqKloQieY4Oay2wKx9h6DilSHmdTE",
-  authDomain: "dunbar-mvp.firebaseapp.com",
-  databaseURL: "https://dunbar-mvp.firebaseio.com",
-  projectId: "dunbar-mvp",
-  storageBucket: "dunbar-mvp.appspot.com",
-  messagingSenderId: "176680631031",
-  appId: "1:176680631031:web:78d4d2cac8a324dfbf71f2",
-  measurementId: "G-VB8CBCQ4LQ",
+  apiKey: "AIzaSyBmtRVYO6uevEKUD4I-Svsf5XEeGLNpXKo",
+  authDomain: "dunbar-social.firebaseapp.com",
+  databaseURL: "https://dunbar-social.firebaseio.com",
+  projectId: "dunbar-social",
+  storageBucket: "dunbar-social.appspot.com",
+  messagingSenderId: "143270588738",
+  appId: "1:143270588738:web:398987080540fe787d18db",
+  measurementId: "G-B5YLY1CY95",
 };
 if (firebase.apps.length == 0) {
   // Initialize Firebase
