@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
   },
   text: {
     //TODO: Add general styles that can apply to any and all buttons (or leave alone and only style specifically for style guide)
+    fontSize: 16,
   },
   styledButton: {
     flex: 1,

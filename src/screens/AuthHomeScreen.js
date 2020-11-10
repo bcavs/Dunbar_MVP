@@ -52,7 +52,6 @@ export default function AuthHomeScreen(props) {
           style={[styles.heroImage]}
           source={require("../assets/images/friend_circles.png")}
         />
-        {/* <Text>This is where the image will go</Text> */}
       </View>
       <View style={[styles.contentContainer]}>
         <Text style={[Typography.heading, { marginVertical: 10 }]}>Dunbar</Text>
