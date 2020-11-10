@@ -27,6 +27,10 @@ export default function Routes() {
     return <LoadingScreen />;
   }
 
+  if (firebase.auth().currentUser) {
+    console.log("Current User: ", firebase.auth().currentUser);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />

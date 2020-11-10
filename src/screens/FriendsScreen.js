@@ -1,9 +1,7 @@
-// HomeScreen.js
-import React, { useContext } from "react";
-import { StyleSheet, Platform, Image, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+// FriendsScreen.js
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 import CustomButton from "../components/CustomButton";
-
 import { logout } from "../helpers/authHelpers";
 
 const styles = StyleSheet.create({
@@ -16,7 +14,7 @@ const styles = StyleSheet.create({
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>Map will go here</Text>
+      <Text>Friends list will go here</Text>
       <CustomButton
         press={() => logout()}
         text="Logout"
