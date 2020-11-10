@@ -1,13 +1,14 @@
 // SignUpScreen.js
 
-import React, { useState, useContext } from "react";
+import React from "react";
 import { StyleSheet, Text, TextInput, View, Button } from "react-native";
-import { AuthContext } from "../navigation/AuthProvider";
 import { Formik } from "formik";
 import * as yup from "yup";
 
+import { login } from "../helpers/authHelpers";
+
 export default function LoginScreen(props) {
-  const { login } = useContext(AuthContext);
+  // const { login } = useContext(AuthContext);
 
   const initialValues = {
     email: "",

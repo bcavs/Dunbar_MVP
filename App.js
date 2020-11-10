@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import Providers from "./src/navigation";
+import Routes from "./src/navigation/Routes";
 import firebase from "firebase";
 
 // Your web app's Firebase configuration
@@ -28,7 +28,7 @@ export class App extends Component {
     };
   }
   render() {
-    return <Providers />;
+    return <Routes />;
   }
 }
 const styles = StyleSheet.create({

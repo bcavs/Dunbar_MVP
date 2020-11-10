@@ -2,15 +2,13 @@
 
 import React, { useState, useContext } from "react";
 import { StyleSheet, Text, TextInput, View, Pressable } from "react-native";
-import { AuthContext } from "../navigation/AuthProvider";
 import { Formik } from "formik";
 import * as yup from "yup";
 
 import { Colors, Typography } from "../styles";
+import { register } from "../helpers/authHelpers";
 
 export default function SignUpScreen({ navigation }) {
-  const { register } = useContext(AuthContext);
-
   const initialValues = {
     email: "",
     password: "",
