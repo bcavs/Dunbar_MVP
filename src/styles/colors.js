@@ -1,9 +1,9 @@
-const primary = "#F4A33E";
+export const primary = "#F4A33E";
 
 //grays for the app -- the higher the number the darker it gets
-const gray1 = "#f2f2f2";
-const gray2 = "#d6d6d6";
-const gray3 = "#7c7c7c";
+export const gray1 = "#f2f2f2";
+export const gray2 = "#d6d6d6";
+export const gray3 = "#7c7c7c";
 
 export const error = {
   color: "purple",

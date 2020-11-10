@@ -8,7 +8,14 @@ const Stack = createStackNavigator();
 
 export default function AuthStack() {
   return (
-    <Stack.Navigator initialRouteName="AuthHome">
+    <Stack.Navigator
+      initialRouteName="AuthHome"
+      screenOptions={{
+        //Allows the swipe back gesture to work on Android
+        gestureEnabled: true,
+        gestureDirection: "horizontal",
+      }}
+    >
       <Stack.Screen
         name="AuthHome"
         component={AuthHomeScreen}
