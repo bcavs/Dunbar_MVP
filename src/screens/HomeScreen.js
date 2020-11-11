@@ -6,6 +6,8 @@ import MapView, { Marker } from "react-native-maps";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MapStyle } from "../styles";
 import { getUserLocation } from "../helpers/mapHelpers";
+import PinInformationCard from "../components/PinInformationCard";
+import { API_HOST } from "@env";
 
 const styles = StyleSheet.create({
   container: {
@@ -37,6 +39,7 @@ export default class HomeScreen extends Component {
   }
 
   componentDidMount() {
+    console.log("Env: ", API_HOST);
     return getUserLocation().then((position) => {
       if (position) {
         this.setState({
@@ -108,7 +111,7 @@ export default class HomeScreen extends Component {
           )}
         </MapView>
 
-        <Text>{this.state.errorMessage}</Text>
+        {/* <Text>{this.state.errorMessage}</Text> */}
 
         {/* Floating top-right "centering" button */}
         <CustomButton
@@ -131,21 +134,7 @@ export default class HomeScreen extends Component {
           }}
         />
         {this.state.pinInformation && (
-          <View
-            style={{
-              position: "absolute",
-              bottom: 0,
-              height: 100,
-              width: 150,
-              backgroundColor: "white",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text>{this.state.pinInformation.title}</Text>
-            <Text>{this.state.pinInformation.longitude}</Text>
-            <Text>{this.state.pinInformation.latitude}</Text>
-          </View>
+          <PinInformationCard pinInformation={this.state.pinInformation} />
         )}
       </View>
     );

@@ -12,6 +12,7 @@
     "@react-navigation/bottom-tabs": "^5.11.0",
     "@react-navigation/native": "^5.7.6",
     "@react-navigation/stack": "^5.9.3",
+    "babel-plugin-dotenv-import": "^2.1.0",
     "expo": "~39.0.2",
     "expo-location": "^9.0.1",
     "expo-permissions": "^9.3.0",
@@ -21,6 +22,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
+    "react-native-dotenv": "^2.4.2",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-maps": "0.27.1",
     "react-native-reanimated": "~1.13.0",
@@ -31,7 +33,8 @@
     "yup": "^0.29.3"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "metro-react-native-babel-preset": "^0.64.0"
   },
   "private": true
 }
