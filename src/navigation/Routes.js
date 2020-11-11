@@ -28,7 +28,8 @@ export default function Routes() {
   }
 
   if (firebase.auth().currentUser) {
-    console.log("Current User: ", firebase.auth().currentUser);
+    // setUser(firebase.auth().currentUser);
+    // console.log("Current User: ", firebase.auth().currentUser);
   }
 
   return (
