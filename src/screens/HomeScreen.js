@@ -5,6 +5,7 @@ import CustomButton from "../components/CustomButton";
 import MapView, { Marker } from "react-native-maps";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MapStyle } from "../styles";
+import { getUserLocation } from "../helpers/mapHelpers";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,25 +16,24 @@ const styles = StyleSheet.create({
   mapView: {
     flex: 1,
     backgroundColor: "red",
-
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
   },
 });
 
-export const getUserLocation = async () => {
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => resolve(position),
-      (e) => reject(e)
-    );
-  });
-};
-
 export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = { userPlacedPin: {}, userLocation: null, errorMessage: "" };
+    this.state = {
+      userPlacedPin: {},
+      userLocation: null,
+      errorMessage: "",
+      pinInformation: {
+        title: "Test Title",
+        longitude: null,
+        latitude: null,
+      },
+    };
   }
 
   componentDidMount() {
@@ -52,14 +52,30 @@ export default class HomeScreen extends Component {
   }
 
   addMarker(e) {
-    console.log(e.nativeEvent.coordinate);
     this.setState({ userPlacedPin: { latlng: e.nativeEvent.coordinate } });
-    console.log("Set: ", this.state.userPlacedPin);
+    this.displayMarkerInfo(e);
+  }
+
+  //set pinInformation
+  displayMarkerInfo(e) {
+    this.setState({
+      pinInformation: {
+        title: "New Title",
+        latitude: e.nativeEvent.coordinate.latitude,
+        longitude: e.nativeEvent.coordinate.longitude,
+      },
+    });
+    console.log(
+      "HomeScreen -> displayMarkerInfo -> e.nativeEvent.coordinate.longitude",
+      e.nativeEvent.coordinate.longitude
+    );
+    console.log(
+      "HomeScreen -> displayMarkerInfo ->  e.nativeEvent.coordinate.latitude",
+      e.nativeEvent.coordinate.latitude
+    );
   }
 
   centerOnUser() {
-    console.log("HomeScreen -> centerOnUser ->  navigator", navigator);
-
     getUserLocation().then((position) => {
       if (position) {
         this.setState({
@@ -93,6 +109,8 @@ export default class HomeScreen extends Component {
         </MapView>
 
         <Text>{this.state.errorMessage}</Text>
+
+        {/* Floating top-right "centering" button */}
         <CustomButton
           press={() => this.centerOnUser()}
           text={
@@ -112,6 +130,23 @@ export default class HomeScreen extends Component {
             elevation: 5,
           }}
         />
+        {this.state.pinInformation && (
+          <View
+            style={{
+              position: "absolute",
+              bottom: 0,
+              height: 100,
+              width: 150,
+              backgroundColor: "white",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text>{this.state.pinInformation.title}</Text>
+            <Text>{this.state.pinInformation.longitude}</Text>
+            <Text>{this.state.pinInformation.latitude}</Text>
+          </View>
+        )}
       </View>
     );
   }
