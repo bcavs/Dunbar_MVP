@@ -71,7 +71,7 @@ function VenueInformationDrawer(props) {
       paddingVertical: 20,
     },
     drawerHeaderText: {
-      fontSize: 240,
+      fontSize: 24,
       fontWeight: "bold",
     },
     actionItemsContainer: {
