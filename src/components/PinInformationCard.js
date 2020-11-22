@@ -171,7 +171,6 @@ function AddressInformationDrawer(props) {
  */
 
 export default function PinInformationCard(props) {
-  // console.log("Pin Info Props: ", props);
   if (props.pinInformation.isVenue) {
     return (
       <>

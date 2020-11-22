@@ -140,7 +140,6 @@ export default class HomeScreen extends Component {
    * have Foursquare info)
    */
   doAddressesMatch(address1, address2) {
-    console.log("Address 1: ", address1, " --- Address 2: ", address2);
     if (address1 === address2) return true;
     else false;
   }
