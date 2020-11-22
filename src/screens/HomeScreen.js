@@ -5,9 +5,13 @@ import CustomButton from "../components/CustomButton";
 import MapView, { Marker } from "react-native-maps";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MapStyle } from "../styles";
-import { getUserLocation } from "../helpers/mapHelpers";
+import {
+  getUserLocation,
+  getReadableAddress,
+  fetchFoursquareInfo,
+  distanceFromFoursquareVenue,
+} from "../helpers/mapHelpers";
 import PinInformationCard from "../components/PinInformationCard";
-import { API_HOST } from "@env";
 
 const styles = StyleSheet.create({
   container: {
@@ -31,15 +35,21 @@ export default class HomeScreen extends Component {
       userLocation: null,
       errorMessage: "",
       pinInformation: {
-        title: "Test Title",
+        venueName: "",
+        venueAddress: "",
+        readableAddress: "",
         longitude: null,
         latitude: null,
+        isVenue: null,
       },
     };
   }
 
   componentDidMount() {
-    console.log("Env: ", API_HOST);
+    /**
+     * On component mount, get the users location from mapHelpers.js
+     * then set the userLocation in state
+     */
     return getUserLocation().then((position) => {
       if (position) {
         this.setState({
@@ -54,28 +64,85 @@ export default class HomeScreen extends Component {
     });
   }
 
+  /**
+   * Adds a pin on the map for the user to view information about the location
+   * @param {*} e
+   */
   addMarker(e) {
     this.setState({ userPlacedPin: { latlng: e.nativeEvent.coordinate } });
     this.displayMarkerInfo(e);
   }
 
-  //set pinInformation
   displayMarkerInfo(e) {
-    this.setState({
-      pinInformation: {
-        title: "New Title",
-        latitude: e.nativeEvent.coordinate.latitude,
-        longitude: e.nativeEvent.coordinate.longitude,
-      },
+    let lat = e.nativeEvent.coordinate.latitude;
+    let lng = e.nativeEvent.coordinate.longitude;
+
+    /**
+     * Fetch venue information about the nearest venue using lat,lng
+     */
+    fetchFoursquareInfo(lat, lng).then((result) => {
+      console.log(
+        "Foursquare data:",
+        result.data.response.venues[0].location.address
+      );
+      //Get a human readable address out of latlng
+      getReadableAddress(lat, lng)
+        .then((res) => {
+          console.log("----> Readable Address: ", res[0].name);
+          this.setState((prevState) => ({
+            pinInformation: {
+              ...prevState.pinInformation,
+              venueName: result.data.response.venues[0].name,
+              venueAddress: result.data.response.venues[0].location.address,
+              latitude: lat,
+              longitude: lng,
+              readableAddress: res[0].name,
+            },
+          }));
+        })
+        /**
+         * Check if the pin address matches the Foursquare nearest venue address
+         * If it does then set the isVenue flag to true to tell the pinInformationCard to display all
+         * Foursquare info
+         */
+
+        .then(() => {
+          if (
+            this.doAddressesMatch(
+              this.state.pinInformation.readableAddress,
+              this.state.pinInformation.venueAddress
+            )
+          ) {
+            console.log("Matched!");
+            this.setState((prevState) => ({
+              pinInformation: {
+                ...prevState.pinInformation,
+                isVenue: true,
+              },
+            }));
+          } else {
+            console.log("No match...");
+            this.setState((prevState) => ({
+              pinInformation: {
+                ...prevState.pinInformation,
+                isVenue: false,
+              },
+            }));
+          }
+        });
     });
-    console.log(
-      "HomeScreen -> displayMarkerInfo -> e.nativeEvent.coordinate.longitude",
-      e.nativeEvent.coordinate.longitude
-    );
-    console.log(
-      "HomeScreen -> displayMarkerInfo ->  e.nativeEvent.coordinate.latitude",
-      e.nativeEvent.coordinate.latitude
-    );
+  }
+
+  /**
+   * Checks to see if the pin location's address matches the nearest Foursquare venue address
+   * If not then we will not show details about the venue like images and name, we will
+   * just show the address (so people can invite friends to a home or building that doesn't
+   * have Foursquare info)
+   */
+  doAddressesMatch(address1, address2) {
+    console.log("Address 1: ", address1, " --- Address 2: ", address2);
+    if (address1 === address2) return true;
+    else false;
   }
 
   centerOnUser() {
@@ -110,10 +177,6 @@ export default class HomeScreen extends Component {
             <Marker key={1} coordinate={this.state.userPlacedPin.latlng} />
           )}
         </MapView>
-
-        {/* <Text>{this.state.errorMessage}</Text> */}
-
-        {/* Floating top-right "centering" button */}
         <CustomButton
           press={() => this.centerOnUser()}
           text={
@@ -133,7 +196,7 @@ export default class HomeScreen extends Component {
             elevation: 5,
           }}
         />
-        {this.state.pinInformation && (
+        {this.state.pinInformation && this.state.pinInformation.latitude && (
           <PinInformationCard pinInformation={this.state.pinInformation} />
         )}
       </View>
