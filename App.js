@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Routes from "./src/navigation/Routes";
 import firebase from "firebase";
+import * as SplashScreen from "expo-splash-screen";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -25,12 +26,55 @@ export class App extends Component {
     super(props);
     this.state = {
       isSignedIn: false,
+      appIsReady: false,
     };
   }
+
+  async componentDidMount() {
+    // Prevent native splash screen from autohiding
+    try {
+      await SplashScreen.preventAutoHideAsync();
+    } catch (e) {
+      console.warn(e);
+    }
+    this.prepareResources();
+  }
+
+  /**
+   * Method that serves to load resources and make API calls
+   */
+  prepareResources = async () => {
+    try {
+      await performAPICalls();
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      this.setState({ appIsReady: true }, async () => {
+        await SplashScreen.hideAsync();
+      });
+    }
+  };
+
   render() {
+    if (!this.state.appIsReady) {
+      return null;
+    }
     return <Routes />;
   }
 }
+
+// Put any code you need to prepare your app in these functions
+async function performAPICalls() {
+  console.log("Performing API Calls");
+  return;
+  // return new Promise((resolve, reject) => {
+  //   setTimeout(function () {
+  //     console.log("API calls successful!");
+  //     resolve("API calls successful!");
+  //   }, 6000);
+  // });
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

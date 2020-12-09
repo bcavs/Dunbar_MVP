@@ -14,6 +14,8 @@ import * as yup from "yup";
 import { login } from "../helpers/authHelpers";
 import { AntDesign } from "@expo/vector-icons";
 import { Spacing, Typography, Colors } from "../styles";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { EvilIcons } from "@expo/vector-icons";
 
 export default function LoginScreen(props) {
   const styles = StyleSheet.create({
@@ -26,15 +28,32 @@ export default function LoginScreen(props) {
     textInput: {
       height: 40,
       width: "100%",
-      borderColor: "gray",
-      borderWidth: 1,
-      marginTop: 8,
+      // flex: 1,
+      height: 45,
+      // borderColor: "gray",
+      // borderWidth: 1,
+      // marginTop: 8,
+      marginLeft: 5,
+      fontSize: 16,
     },
     backButtonContainer: {
       height: 75,
       justifyContent: "center",
       alignItems: "flex-start",
       width: "100%",
+    },
+    inputContainer: {
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#fff",
+      borderWidth: 0.5,
+      // borderColor: "#fff",
+      // height: 40,
+      borderRadius: 5,
+      marginTop: 10,
+      paddingLeft: 25,
     },
   });
 
@@ -60,18 +79,28 @@ export default function LoginScreen(props) {
         }}
       >
         <Text
-          style={{
-            textAlign: "left",
-            alignSelf: "flex-start",
-          }}
+          style={[
+            Typography.heading,
+            {
+              textAlign: "left",
+              alignSelf: "flex-start",
+              marginBottom: 10,
+            },
+          ]}
         >
           Welcome back
         </Text>
         <Text
-          style={{
-            textAlign: "left",
-            alignSelf: "flex-start",
-          }}
+          style={[
+            Colors.text_darkgray,
+            {
+              textAlign: "left",
+              alignSelf: "flex-start",
+              fontSize: 16,
+              fontWeight: "bold",
+              marginBottom: 25,
+            },
+          ]}
         >
           Log in to continue!
         </Text>
@@ -93,28 +122,43 @@ export default function LoginScreen(props) {
           }) => {
             return (
               <>
-                <TextInput
-                  name="email"
-                  placeholder="Email"
-                  value={values.email}
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  autoCapitalize="none"
-                  style={styles.textInput}
-                />
+                <View style={styles.inputContainer}>
+                  <MaterialCommunityIcons
+                    name="email-outline"
+                    size={24}
+                    color="black"
+                  />
+                  <TextInput
+                    name="email"
+                    placeholder="Email"
+                    value={values.email}
+                    onChangeText={handleChange("email")}
+                    onBlur={handleBlur("email")}
+                    autoCapitalize="none"
+                    style={styles.textInput}
+                  />
+                </View>
                 {errors.email && touched.email && (
                   <Text style={{ color: "red" }}>{errors.email}</Text>
                 )}
-                <TextInput
-                  name="password"
-                  placeholder="Password"
-                  value={values.password}
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
-                  secureTextEntry
-                  autoCapitalize="none"
-                  style={styles.textInput}
-                />
+                <View style={styles.inputContainer}>
+                  <EvilIcons
+                    name="lock"
+                    size={35}
+                    color="black"
+                    // style={{ backgroundColor: "red" }}
+                  />
+                  <TextInput
+                    name="password"
+                    placeholder="Password"
+                    value={values.password}
+                    onChangeText={handleChange("password")}
+                    onBlur={handleBlur("password")}
+                    secureTextEntry
+                    autoCapitalize="none"
+                    style={[styles.textInput, { marginLeft: 0 }]}
+                  />
+                </View>
                 {errors.password && touched.password && (
                   <Text style={{ color: "red" }}>{errors.password}</Text>
                 )}
