@@ -1,7 +1,7 @@
 // HomeScreen.js
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
-import CustomButton from "../components/CustomButton";
+import DunbarButton from "../components/DunbarButton";
 import MapView, { Marker } from "react-native-maps";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MapStyle } from "../styles";
@@ -176,16 +176,12 @@ export default class HomeScreen extends Component {
             <Marker key={1} coordinate={this.state.userPlacedPin.latlng} />
           )}
         </MapView>
-        <CustomButton
-          press={() => this.centerOnUser()}
-          text={
-            <MaterialIcons name="location-searching" size={24} color="black" />
-          }
-          buttonStyle={{
+        <View
+          style={{
             position: "absolute",
             top: 20,
             right: 20,
-            padding: 5,
+            // padding: 5,
             backgroundColor: "white",
             borderRadius: 50,
             shadowColor: "#000",
@@ -193,8 +189,24 @@ export default class HomeScreen extends Component {
             shadowOpacity: 0.8,
             shadowRadius: 2,
             elevation: 5,
+            width: 50,
+            height: 50,
           }}
-        />
+        >
+          <DunbarButton
+            onPress={() => this.centerOnUser()}
+            text={
+              <MaterialIcons
+                name="location-searching"
+                size={24}
+                color="black"
+              />
+            }
+            containerBackgroundColor="transparent"
+            containerMarginHorizontal={0}
+            containerMarginVertical={0}
+          />
+        </View>
         {this.state.pinInformation && this.state.pinInformation.latitude && (
           <PinInformationCard pinInformation={this.state.pinInformation} />
         )}

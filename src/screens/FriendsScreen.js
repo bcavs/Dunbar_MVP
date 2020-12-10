@@ -1,7 +1,7 @@
 // FriendsScreen.js
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import CustomButton from "../components/CustomButton";
+import DunbarButton from "../components/DunbarButton";
 import { logout } from "../helpers/authHelpers";
 
 const styles = StyleSheet.create({
@@ -15,11 +15,12 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text>Friends list will go here</Text>
-      <CustomButton
-        press={() => logout()}
+      <DunbarButton
         text="Logout"
-        primaryButton
-        buttonStyle={{ paddingHorizontal: 25, flex: null }}
+        primary
+        onPress={() => logout()}
+        buttonWidth="50%"
+        containerBackgroundColor="transparent"
       />
     </View>
   );

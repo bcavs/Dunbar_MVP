@@ -1,4 +1,6 @@
-export const primary = "#F4A33E";
+export const primary = "#f05e23";
+
+export const facebook = "#1877F2";
 
 //grays for the app -- the higher the number the darker it gets
 export const gray1 = "#f2f2f2";

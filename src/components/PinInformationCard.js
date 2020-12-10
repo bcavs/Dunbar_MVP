@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { Spacing, Typography, Colors } from "../styles";
-import CustomButton from "../components/CustomButton";
+import DunbarButton from "../components/DunbarButton";
 
 function DebugConsole(props) {
   const debug__styles = StyleSheet.create({
@@ -92,20 +92,10 @@ function VenueInformationDrawer(props) {
         {props.pinInformation.readableAddress}
       </Text>
       <View style={styles.actionItemsContainer}>
-        <CustomButton
-          text={"Invite Friends"}
-          primaryButton
-          buttonStyle={{
-            paddingHorizontal: 25,
-            width: 175,
-          }}
-          textStyle={{
-            fontSize: 14,
-            fontWeight: "bold",
-          }}
-          press={() => {
-            console.log("Pressed");
-          }}
+        <DunbarButton
+          onPress={() => console.log("Invite friends pressed")}
+          text="Invite friends"
+          primary
         />
       </View>
     </View>
@@ -130,7 +120,6 @@ function AddressInformationDrawer(props) {
       fontWeight: "bold",
     },
     actionItemsContainer: {
-      // backgroundColor: "red",
       height: 50,
       width: "100%",
       justifyContent: "center",
@@ -145,19 +134,10 @@ function AddressInformationDrawer(props) {
       </Text>
       <Text style={[Colors.text_darkgray]}>subtext goes here...</Text>
       <View style={styles.actionItemsContainer}>
-        <CustomButton
-          text={"Invite Friends"}
-          primaryButton
-          buttonStyle={{
-            paddingHorizontal: 25,
-            width: 175,
-          }}
-          textStyle={{
-            fontWeight: "bold",
-          }}
-          press={() => {
-            console.log("Pressed");
-          }}
+        <DunbarButton
+          onPress={() => console.log("Invite friends pressed")}
+          text="Invite friends"
+          primary
         />
       </View>
     </View>

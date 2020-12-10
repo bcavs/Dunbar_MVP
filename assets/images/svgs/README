@@ -1,0 +1,9 @@
+This folder is made to house all SVGs in the code and their React component equivalent
+
+To create a React component out of the SVG:
+
+1. Drop the SVG file in this folder and open it in a code editor
+2. Copy all the code and paste it in here: https://react-svgr.com/playground/
+3. Make sure the "React Native" box is checked on the left side
+4. Copy the output into a new .js file
+5. Add the new component to the index.js exports
