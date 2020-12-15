@@ -7,9 +7,16 @@ import AuthHomeScreen from "../screens/AuthHomeScreen";
 const Stack = createStackNavigator();
 
 export default function AuthStack() {
+  let initialRoute;
+  if (__DEV__) {
+    console.log("AuthStack.js === You are currently in dev mode");
+    initialRoute = "AuthStack";
+  } else {
+    initialRoute = "AuthStack";
+  }
   return (
     <Stack.Navigator
-      initialRouteName="AuthHome"
+      initialRouteName={initialRoute}
       screenOptions={{
         //Allows the swipe back gesture to work on Android
         gestureEnabled: true,

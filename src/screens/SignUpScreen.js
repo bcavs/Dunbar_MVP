@@ -2,99 +2,211 @@
 
 import React, { useState, useContext } from "react";
 import { StyleSheet, Text, TextInput, View, Pressable } from "react-native";
-import { Formik } from "formik";
 import * as yup from "yup";
 
-import { Colors, Typography } from "../styles";
+import { Formik } from "formik";
+import { Colors, Typography, Spacing } from "../styles";
 import { register } from "../helpers/authHelpers";
+import CustomInput from "../components/CustomInput";
+import { AntDesign, EvilIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import DunbarButton from "../components/DunbarButton"
 
 export default function SignUpScreen({ navigation }) {
+
+  const styles = StyleSheet.create({
+		container: {
+			flex: 1,
+			justifyContent: "center",
+			alignItems: "center",
+			backgroundColor: "white",
+		},
+		textInput: {
+			height: 40,
+			width: "100%",
+			// flex: 1,
+			height: 45,
+			// borderColor: "gray",
+			// borderWidth: 1,
+			// marginTop: 8,
+			marginLeft: 5,
+			fontSize: 16,
+		},
+		backButtonContainer: {
+			height: 75,
+			justifyContent: "center",
+			alignItems: "flex-start",
+			width: "100%",
+		},
+		inputContainer: {
+			width: "100%",
+			flexDirection: "row",
+			justifyContent: "center",
+			alignItems: "center",
+			backgroundColor: "#fff",
+			borderWidth: 0.5,
+			// borderColor: "#fff",
+			// height: 40,
+			borderRadius: 5,
+			marginTop: 10,
+			paddingLeft: 25,
+		},
+  });
+  
+
   const initialValues = {
     email: "",
     password: "",
+    firstName:"",
+    lastName:""
   };
   return (
-    <View style={styles.container}>
-      <Text style={[Typography.heading, headerStyle]}>Sign Up</Text>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={signUpValidationSchema}
-        onSubmit={(values) => register(values.email, values.password)}
-      >
-        {({
-          values,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          errors,
-          isValid,
-          touched,
-        }) => {
-          return (
-            <>
-              <TextInput
-                name="email"
-                placeholder="Email"
-                value={values.email}
-                onChangeText={handleChange("email")}
-                onBlur={handleBlur("email")}
-                autoCapitalize="none"
-                style={styles.textInput}
-              />
-              {errors.email && touched.email && (
-                <Text style={Colors.error}>{errors.email}</Text>
-              )}
-              <TextInput
-                name="password"
-                placeholder="Password"
-                value={values.password}
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                secureTextEntry
-                autoCapitalize="none"
-                style={styles.textInput}
-              />
-
-              {errors.password && touched.password && (
-                <Text style={{ color: "red" }}>{errors.password}</Text>
-              )}
-              <Pressable
-                onPress={handleSubmit}
-                disabled={!isValid}
-                style={[Colors.background_primary]}
-              >
-                <Text>Sign Up</Text>
-              </Pressable>
-              <Pressable
-                title="Already have an account? Login"
-                onPress={() => navigation.navigate("Login")}
-              >
-                <Text>Already have an account? Login</Text>
-              </Pressable>
-            </>
-          );
-        }}
-      </Formik>
-    </View>
+    <View style={[Spacing.global_horizontal_padding, styles.container]}>
+			<View style={styles.backButtonContainer}>
+				<Pressable onPress={() => props.navigation.goBack()}>
+					<AntDesign name="left" size={32} color={Colors.gray3} />
+				</Pressable>
+			</View>
+			<View
+				style={{
+					flex: 1,
+					justifyContent: "flex-start",
+					alignItems: "center",
+					backgroundColor: "white",
+					width: "100%",
+				}}
+			>
+				<Text
+					style={[
+						Typography.heading,
+						{
+							textAlign: "left",
+							alignSelf: "flex-start",
+							marginBottom: 10,
+						},
+					]}
+				>
+					Hi there!
+				</Text>
+				<Text
+					style={[
+						Colors.text_darkgray,
+						{
+							textAlign: "left",
+							alignSelf: "flex-start",
+							fontSize: 16,
+							fontWeight: "bold",
+							marginBottom: 25,
+						},
+					]}
+				>
+					Fill out the form below to join!
+				</Text>
+				<Formik
+					initialValues={initialValues}
+					validationSchema={signUpValidationSchema}
+					validateOnChange={false}
+					onSubmit={(values) => {
+						console.log("Registering with: ", values)
+						register(values.email, values.password);
+					}}
+				>
+					{({
+						values,
+						handleChange,
+						handleBlur,
+						handleSubmit,
+						isValid,
+					}) => {
+						return (
+							<>
+								<CustomInput
+									leftIcon={
+										<MaterialCommunityIcons
+											name="email-outline"
+											size={24}
+											color={Colors.primary}
+										/>
+									}
+									value={values.email}
+									name="email"
+									placeholder="Email"
+									handleChange={handleChange("email")}
+									handleBlur={handleBlur("email")}
+									autoCapitalize="none"
+								/>
+                	<CustomInput
+									leftIcon={
+										<MaterialCommunityIcons
+											name="account-outline"
+											size={24}
+											color={Colors.primary}
+										/>
+									}
+									value={values.firstName}
+									name="firstName"
+									placeholder="First Name"
+									handleChange={handleChange("firstName")}
+									handleBlur={handleBlur("firstName")}
+									autoCapitalize="none"
+								/>
+                	<CustomInput
+									leftIcon={
+										<MaterialCommunityIcons
+											name="account-outline"
+											size={24}
+											color={Colors.primary}
+										/>
+									}
+									value={values.lastName}
+									name="lastName"
+									placeholder="Last Name"
+									handleChange={handleChange("lastName")}
+									handleBlur={handleBlur("lastName")}
+									autoCapitalize="none"
+								/>
+								<CustomInput
+									leftIcon={
+										<EvilIcons
+										name="lock"
+										size={35}
+										color={Colors.primary}
+									/>
+									}
+									value={values.password}
+									name="password"
+									placeholder="Password"
+									handleChange={handleChange("password")}
+									handleBlur={handleBlur("password")}
+									secureTextEntry
+									autoCapitalize="none"
+								/>
+								{!isValid && <Text>Uh oh, there's an error :(</Text>}
+								<View style={{
+									flexDirection:"row",
+								}}>
+									<DunbarButton
+										text="Sign up"
+										primary
+										onPress={()=>handleSubmit()}
+									/>
+								</View>
+							</>
+						);
+					}}
+				</Formik>
+			</View>
+			<Pressable
+				style={{ marginTop: 25, marginBottom: 14 }}
+				onPress={() => navigation.navigate("Login")}
+				>
+				<Text>
+					<Text>Don't have an account?</Text>{" "}
+					<Text style={{ fontWeight: "bold" }}>Create one!</Text>
+				</Text>
+			</Pressable>
+		</View>
   );
 }
-
-const headerStyle = { color: "blue" };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  textInput: {
-    height: 40,
-    width: "90%",
-    borderColor: "gray",
-    borderWidth: 1,
-    marginTop: 8,
-  },
-});
 
 const signUpValidationSchema = yup.object().shape({
   email: yup

@@ -4,6 +4,7 @@ import { Colors } from "../../styles";
 export const ButtonView = styled.View`
   background-color: ${({ backgroundColor }) => backgroundColor};
   width: 100%;
+  flex:1;
   height: ${({ height }) => `${height}px`};
   justify-content: center;
   margin: ${({ verticalMargin, horizontalMargin }) =>
@@ -15,7 +16,10 @@ export const ButtonPressable = styled.Pressable`
   width: ${({ width }) => width};
   justify-content: center;
   align-items: center;
+  display:flex;
   height: 100%;
+  text-align:center;
+  max-height:100px;
   border-radius: 50px;
   border-width: 1px;
   flex-direction: row;
@@ -39,6 +43,7 @@ export const ButtonText = styled.Text`
 
   /* If primary button then set text color to white, else set to defined color */
   color: ${({ isPrimary, color }) => (isPrimary ? "white" : color)};
+  text-align:center;
 `;
 
 export const IconContainer = styled.View`

@@ -76,11 +76,11 @@ function VenueInformationDrawer(props) {
     },
     actionItemsContainer: {
       // backgroundColor: "red",
-      height: 50,
-      width: "100%",
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 25,
+      // height: 50,
+      // width: "100%",
+      // justifyContent: "center",
+      // alignItems: "center",
+      // marginTop: 25,
     },
   });
   return (
@@ -91,13 +91,13 @@ function VenueInformationDrawer(props) {
       <Text style={[Colors.text_darkgray]}>
         {props.pinInformation.readableAddress}
       </Text>
-      <View style={styles.actionItemsContainer}>
+      {/* <View style={styles.actionItemsContainer}> */}
         <DunbarButton
           onPress={() => console.log("Invite friends pressed")}
           text="Invite friends"
           primary
         />
-      </View>
+      {/* </View> */}
     </View>
   );
 }
@@ -133,13 +133,11 @@ function AddressInformationDrawer(props) {
         {props.pinInformation.readableAddress}
       </Text>
       <Text style={[Colors.text_darkgray]}>subtext goes here...</Text>
-      <View style={styles.actionItemsContainer}>
         <DunbarButton
           onPress={() => console.log("Invite friends pressed")}
           text="Invite friends"
           primary
         />
-      </View>
     </View>
   );
 }
