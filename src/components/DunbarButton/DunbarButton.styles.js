@@ -19,6 +19,7 @@ export const ButtonPressable = styled.Pressable`
   display:flex;
   height: 100%;
   text-align:center;
+  height: ${({ height }) => height};
   max-height:100px;
   border-radius: 50px;
   border-width: 1px;

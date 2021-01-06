@@ -33,17 +33,24 @@ export default function Routes() {
   }
 
   return (
+    <>
+    {/* Controls the top part of the safe area */}
+    <SafeAreaView style={{backgroundColor: 'white'}}/>
+    {/* ========== */}
+
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
       <NavigationContainer>
         {user ? <HomeStack /> : <AuthStack />}
       </NavigationContainer>
     </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'black'
   },
 });

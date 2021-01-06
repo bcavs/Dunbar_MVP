@@ -17,6 +17,7 @@ const DunbarButton = ({
   buttonBackgroundColor,
   buttonBorderColor,
   buttonWidth,
+  buttonHeight,
 
   text,
   textColor,
@@ -39,6 +40,7 @@ const DunbarButton = ({
           hasIcon={rightIcon || leftIcon}
           isPrimary={primary}
           width={buttonWidth}
+          height={buttonHeight}
         >
           {/* Render left icon is passed in */}
           {leftIcon &&
@@ -80,6 +82,7 @@ DunbarButton.propTypes = {
   buttonBackgroundColor: PropTypes.string,
   buttonBorderColor: PropTypes.string,
   buttonWidth: PropTypes.string,
+  buttonHeight: PropTypes.string,
 
   //Button Text props
   text: PropTypes.oneOfType([
@@ -108,6 +111,7 @@ DunbarButton.defaultProps = {
   buttonBackgroundColor: "#fff",
   buttonBorderColor: "#dfdfdf",
   buttonWidth: "100%",
+  buttonHeight: "100%",
 
   //Button Text props
   textColor: "#000",
