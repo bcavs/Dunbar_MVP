@@ -11,13 +11,14 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { login } from "../helpers/authHelpers";
 import { AntDesign } from "@expo/vector-icons";
-import { Spacing, Typography, Colors } from "../styles";
+import { Spacing, Typography, Colors } from "../../styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
-import CustomInput from "../components/CustomInput";
-import DunbarButton from "../components/DunbarButton";
+
+import { login } from "../../helpers/authHelpers";
+import CustomInput from "../../components/CustomInput";
+import DunbarButton from "../../components/DunbarButton";
 
 export default function LoginScreen(props) {
 	const styles = StyleSheet.create({

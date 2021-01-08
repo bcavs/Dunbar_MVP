@@ -1,8 +1,14 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../screens/HomeScreen";
+
+import ExploreStack from "./ExploreStack";
+
 import FriendsScreen from "../screens/FriendsScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import InvitesScreen from "../screens/InvitesScreen";
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -12,7 +18,7 @@ function HomeTabNavigator() {
     <Tab.Navigator>
       <Tab.Screen
         name="Explore"
-        component={HomeScreen}
+        component={ExploreStack}
         options={{ header: () => null }}
       />
       <Tab.Screen
@@ -24,7 +30,7 @@ function HomeTabNavigator() {
   );
 }
 
-export default function HomeStack() {
+export default function AppStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen

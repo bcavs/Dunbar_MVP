@@ -5,11 +5,11 @@ import { StyleSheet, Text, TextInput, View, Pressable } from "react-native";
 import * as yup from "yup";
 
 import { Formik } from "formik";
-import { Colors, Typography, Spacing } from "../styles";
-import { register } from "../helpers/authHelpers";
-import CustomInput from "../components/CustomInput";
+import { Colors, Typography, Spacing } from "../../styles";
+import { register } from "../../helpers/authHelpers";
 import { AntDesign, EvilIcons, MaterialCommunityIcons } from "@expo/vector-icons";
-import DunbarButton from "../components/DunbarButton"
+import CustomInput from "../../components/CustomInput";
+import DunbarButton from "../../components/DunbarButton"
 
 export default function SignUpScreen({ navigation }) {
 

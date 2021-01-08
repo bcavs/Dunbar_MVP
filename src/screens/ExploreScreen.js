@@ -1,4 +1,4 @@
-// HomeScreen.js
+// ExploreScreen.js
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import DunbarButton from "../components/DunbarButton";
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class HomeScreen extends Component {
+export default class ExploreScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {

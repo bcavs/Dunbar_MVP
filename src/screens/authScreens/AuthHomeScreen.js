@@ -1,10 +1,10 @@
-// AuthHomeScreen.js
+// AuthExploreScreen.js
 import React from "react";
 import { StyleSheet, Pressable, Text, View } from "react-native";
-import { default as HeroImage } from "../../assets/images/svgs/dnbr-login-shadow";
-import { GoogleIcon, FacebookIcon, EmailIcon } from "../../assets/images/svgs";
-import DunbarButton from "../components/DunbarButton";
-import { Colors } from "../styles";
+import { default as HeroImage } from "../../../assets/images/svgs/dnbr-login-shadow";
+import { GoogleIcon, FacebookIcon, EmailIcon } from "../../../assets/images/svgs";
+import DunbarButton from "../../components/DunbarButton";
+import { Colors } from "../../styles";
 
 const styles = StyleSheet.create({
   container: {
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function AuthHomeScreen(props) {
+export default function AuthExploreScreen(props) {
   return (
     <View style={styles.container}>
       <View style={[styles.imageContainer]}>

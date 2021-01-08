@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import firebase from "firebase";
 import AuthStack from "./AuthStack";
-import HomeStack from "./HomeStack";
+import AppStack from "./AppStack";
 import LoadingScreen from "../screens/LoadingScreen";
 import { SafeAreaView, StyleSheet, StatusBar } from "react-native";
 
@@ -36,7 +36,7 @@ export default function Routes() {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
       <NavigationContainer>
-        {user ? <HomeStack /> : <AuthStack />}
+        {user ? <AppStack /> : <AuthStack />}
       </NavigationContainer>
     </SafeAreaView>
   );
