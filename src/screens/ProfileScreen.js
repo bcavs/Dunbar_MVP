@@ -1,4 +1,4 @@
-// FriendsScreen.js
+// ProfileScreen.js
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import DunbarButton from "../components/DunbarButton";
@@ -11,10 +11,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-export default function FriendsScreen() {
+export default function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <Text>Friends list will go here</Text>
+      <Text>This is your personal profile</Text>
       <DunbarButton
         text="Logout"
         primary

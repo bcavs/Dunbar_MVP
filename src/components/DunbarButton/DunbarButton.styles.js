@@ -19,6 +19,7 @@ export const ButtonPressable = styled.Pressable`
   display:flex;
   height: 100%;
   text-align:center;
+  height: ${({ height }) => height};
   max-height:100px;
   border-radius: 50px;
   border-width: 1px;
@@ -29,18 +30,15 @@ export const ButtonPressable = styled.Pressable`
     css`
       padding: 0 50px;
     `}
-
   /* If the button is set to primary then make the background and border the primary color */
   background-color: ${({ isPrimary, backgroundColor }) =>
     isPrimary ? Colors.primary : backgroundColor};
-
   border-color: ${({ isPrimary, borderColor }) =>
     isPrimary ? Colors.primary : borderColor};
 `;
 
 export const ButtonText = styled.Text`
   font-weight: ${({ weight }) => weight};
-
   /* If primary button then set text color to white, else set to defined color */
   color: ${({ isPrimary, color }) => (isPrimary ? "white" : color)};
   text-align:center;
@@ -53,14 +51,12 @@ export const IconContainer = styled.View`
   justify-content: center;
   align-items: center;
   padding: 10px;
-
   /* Position left or right based on props */
   ${({ left }) =>
     left &&
     css`
       left: 0;
     `}
-
   ${({ right }) =>
     right &&
     css`
