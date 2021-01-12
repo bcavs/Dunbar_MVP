@@ -25,3 +25,18 @@ export async function logout() {
     // setErrorMessage(e);
   }
 }
+
+export async function confirmVerificationCode(
+  verificationId,
+  verificationCode
+) {
+  try {
+    const credential = firebase.auth.PhoneAuthProvider.credential(
+      verificationId,
+      verificationCode
+    );
+    await firebase.auth().signInWithCredential(credential);
+  } catch (err) {
+    console.error(err);
+  }
+}

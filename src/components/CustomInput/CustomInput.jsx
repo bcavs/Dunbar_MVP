@@ -10,15 +10,17 @@ const CustomInput = ({
   containerMarginVertical,
   containerMarginHorizontal,
 
+  error,
   labelText,
-
+  touched,
   name,
   placeholder,
   value,
   handleChange,
-  handleBlur,
   secureTextEntry,
   autoCapitalize,
+  keyboardType,
+  setFieldTouched,
 
   leftIcon,
   rightIcon,
@@ -65,13 +67,15 @@ const CustomInput = ({
           name={name}
           placeholder={placeholder}
           value={value}
+          touched={touched}
           onChangeText={handleChange}
           hasIcon={rightIcon || leftIcon}
-          onFocus={() => setFocused(true)}
-          onBlur={() => { handleBlur; setFocused(false) }}
+          onFocus={() => {setFocused(true); setFieldTouched(name, false)}}
+          onBlur={() => {setFocused(false); setFieldTouched(name)}}
           focused={focused}
           secureTextEntry={secureTextEntry}
           autoCapitalize={autoCapitalize}
+          keyboardType={keyboardType}
 
           style={{
             width: '100%',
@@ -97,6 +101,7 @@ const CustomInput = ({
           }}
         >{rightIcon}</IconContainer>}
       </View>
+        {touched && error && <Text>{error}</Text>}
     </View>
   );
 }

@@ -67,7 +67,7 @@ export default function AuthExploreScreen(props) {
           <Divider />
 
           <DunbarButton
-            text="Log in with Email"
+            text="Log in with Email or Phone"
             fontWeight="bold"
             leftIcon={<EmailIcon />}
             onPress={() => props.navigation.navigate("Login")}
