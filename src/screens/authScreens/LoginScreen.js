@@ -121,6 +121,7 @@ export default function LoginScreen(props) {
 						handleChange,
 						handleBlur,
 						handleSubmit,
+						setFieldTouched,
 						isValid,
 					}) => {
 						return (
@@ -138,6 +139,7 @@ export default function LoginScreen(props) {
 									placeholder="Email"
 									handleChange={handleChange("email")}
 									handleBlur={handleBlur("email")}
+									setFieldTouched={setFieldTouched}
 									autoCapitalize="none"
 								/>
 								<CustomInput
@@ -152,6 +154,7 @@ export default function LoginScreen(props) {
 									name="password"
 									placeholder="Password"
 									handleChange={handleChange("password")}
+									setFieldTouched={setFieldTouched}
 									handleBlur={handleBlur("password")}
 									secureTextEntry
 									autoCapitalize="none"
