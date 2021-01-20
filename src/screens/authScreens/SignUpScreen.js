@@ -31,7 +31,8 @@ import firebase from "firebase";
 
 export default function SignUpScreen({ navigation }) {
   const initialValues = {
-    emailOrPhone: "",
+    email: "",
+    phone:"",
     isEmail: true,
     password: "",
     passwordConfirm: "",
@@ -113,23 +114,13 @@ export default function SignUpScreen({ navigation }) {
             validationSchema={signUpValidationSchema}
             validateOnChange={true}
             validateOnBlur={true}
-            onSubmit={async (values) => {
+            onSubmit={(values) => {
               Keyboard.dismiss();
-              console.log(values);
-              if (!values.isEmail) {
-                try {
-                  const phoneProvider = new firebase.auth.PhoneAuthProvider();
-                  const verificationId = await phoneProvider.verifyPhoneNumber(
-                    "+1" + values.emailOrPhone,
-                    recaptchaVerifier.current
-                  );
-                  setVerificationId(verificationId);
-                } catch (err) {
-                  console.error(err);
-                }
-              } else {
-                register(values.emailOrPhone, values.password);
-              }
+              console.log("Signup Screen user values: ", values);
+             
+                //TODO validate all values that need to be passed into the register function
+                register(values);
+              
             }}
           >
             {({
@@ -152,16 +143,12 @@ export default function SignUpScreen({ navigation }) {
                       />
                     }
                     keyboardType="email-address"
-                    touched={touched.emailOrPhone}
-                    value={values.emailOrPhone}
-                    error={errors.emailOrPhone}
-                    name="emailOrPhone"
-                    placeholder="Email/Phone"
-                    handleChange={(val) => {
-                      setFieldValue("emailOrPhone", val, true);
-                      if (val.includes("@")) setFieldValue("isEmail", true);
-                      else setFieldValue("isEmail", false);
-                    }}
+                    touched={touched.email}
+                    value={values.email}
+                    error={errors.email}
+                    name="email"
+                    placeholder="Email"
+                    handleChange={handleChange("email")}
                     setFieldTouched={setFieldTouched}
                     autoCapitalize="none"
                   />
@@ -257,23 +244,10 @@ export default function SignUpScreen({ navigation }) {
   );
 }
 
-const PHONE_REGEX = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
 const signUpValidationSchema = yup.object().shape({
-  isEmail: yup.boolean(),
-  emailOrPhone: yup.string().when("isEmail", {
-    is: true,
-    then: yup
-      .string()
-      .email("Please enter a valid email address or 10-digit phone number")
+  email: yup.string()
+      .email("Please enter a valid email address")
       .required("This field is required"),
-    otherwise: yup
-      .string()
-      .matches(
-        PHONE_REGEX,
-        "Please enter a valid email address or 10-digit phone number"
-      )
-      .required("This field is required"),
-  }),
   password: yup
     .string()
     .min(6, ({ min }) => `Password must be at least ${min} characters`)
